@@ -9,7 +9,7 @@ node{
 
         stage('Setup') {
 
-            gradle clean
+            gradle 'clean'
         }
 
 }

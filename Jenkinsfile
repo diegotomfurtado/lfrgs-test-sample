@@ -12,7 +12,7 @@ node{
 
         stage('Build') {
 
-                gradlew 'build -x unitTest'
+                gradle build unitTest
 
         }
 }

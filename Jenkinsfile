@@ -23,8 +23,8 @@ node{
             checkout scm
 
             echo 'Testing 001'
-            sh 'make'
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            sh 'make check || true'
+            junit '**/target/*.xml'
 
             echo 'Testing 002'
             sh './gradle clean sonarqube'

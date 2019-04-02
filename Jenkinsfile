@@ -22,7 +22,7 @@ node{
 
             checkout scm
 
-            sh "./gradlew clean sonarqube"
+            sh './gradle clean sonarqube'
         }
 
         stage('Deploy') {

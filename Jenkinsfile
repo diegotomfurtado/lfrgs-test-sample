@@ -12,7 +12,6 @@ node{
             echo 'Unit Testing...'
 
             gradle 'unitTest'
-            sh 'make'
         }
 
         stage('Integration Testing') {

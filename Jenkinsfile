@@ -27,21 +27,7 @@ node("devOps") {
             }
         }
 
-        stage('Test') {
-            try {
-                wrap([$class: 'Xvnc']) {
-                    gradlew 'test unitTest integrationTest functionalTest'
-                }
-            } catch (exc) {
-                throw exc
-            } finally {
-                junit testResults: '**/build/test-results/test/*.xml', allowEmptyResults: true
-                junit testResults: '**/build/test-results/unitTest/*.xml', allowEmptyResults: true
-                junit testResults: '**/build/test-results/integrationTest/*.xml', allowEmptyResults: true
-                junit testResults: '**/build/test-results/performTests/*.xml', allowEmptyResults: true
-                archiveArtifacts artifacts: '**/build/test-results/functionalTest/attachments/**', fingerprint: true, allowEmptyArchive: true
-            }
-        }
+        
 
     } finally {
         stage('Cleanup') {

@@ -1,3 +1,5 @@
+#!groovy
+import groovy.transform.Field
 
 node{
 
@@ -10,9 +12,4 @@ node{
             gradle clean
         }
 
-        stage('Build') {
-
-                gradle build unitTest
-
-        }
 }

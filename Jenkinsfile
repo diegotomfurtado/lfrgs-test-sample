@@ -12,6 +12,7 @@ node{
             echo 'Unit Testing...'
 
             gradle 'unitTest'
+            sh 'make'
         }
 
         stage('Integration Testing') {
@@ -26,8 +27,12 @@ node{
             sh 'make check || true'
             junit '**/target/*.xml'
 
-            echo 'Testing 002'
-            sh './gradle clean sonarqube'
+            if (currentBuild.currentResult == 'SUCCESS') {
+                stage('Deploy') {
+                    sh 'make publish'
+                }
+            }
+
         }
 
         stage('Deploy') {

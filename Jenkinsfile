@@ -3,8 +3,10 @@ node{
 
         stage('Build') {
 
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+
             gradle 'clean'
-            gradle 'functionalTest'
+            sh '"'gradle clean sonarqube'
         }
 
         stage('Unit Testing') {

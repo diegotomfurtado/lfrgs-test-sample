@@ -21,13 +21,11 @@ node("devOps") {
 
         stage('Build') {
             try {
-                gradlew 'build -x test -x integrationTest -x unitTest'
+                gradlew 'build -x unitTest'
             } catch (exc) {
                 throw exc
             }
         }
-
-        
 
     } finally {
         stage('Cleanup') {

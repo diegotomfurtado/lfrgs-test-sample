@@ -14,14 +14,19 @@ node{
             gradle 'unitTest'
         }
 
-        stage('Functional Testing') {
+        stage('Integration Testing') {
 
-            echo 'Functional Testing...'
+            echo 'Integration Testing...'
 
             gradle 'functionalTest'
 
             checkout scm
 
+            echo 'Testing 001'
+            sh 'make'
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+
+            echo 'Testing 002'
             sh './gradle clean sonarqube'
         }
 

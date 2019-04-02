@@ -1,23 +1,19 @@
 
 node{
 
-        stage('Checkout') {
-            checkout scm
-        }
-
-        stage('Setup') {
-
-            gradle 'clean'
-        }
-
         stage('Build') {
 
+            gradle 'clean'
             gradle 'functionalTest'
         }
 
-        stage('Test'){
-            wrap([$class: 'Xvnc']) {
-               gradle 'test functionalTest --continue'
-            }
+        stage('Tests') {
+
+            echo 'Testing...'
+        }
+
+        stage('Deliver') {
+
+            echo 'Delivering...'
         }
 }

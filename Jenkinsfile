@@ -14,7 +14,12 @@ node{
 
         stage('Build') {
 
-                gradle 'unitTest'
+            gradle 'functionalTest'
+        }
 
+        stage('Test'){
+            wrap([$class: 'Xvnc']) {
+               gradlew 'test functionalTest --continue'
+            }
         }
 }

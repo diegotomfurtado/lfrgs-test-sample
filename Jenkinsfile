@@ -11,7 +11,9 @@ node{
 
             echo 'Testing...'
 
-                git url: 'https://github.com/diegotomfurtado/lfrgs-test-sample.git'
+            checkout scm
+
+           sh "./gradlew clean sonarqube"
 
 
         }

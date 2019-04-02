@@ -1,5 +1,5 @@
 
-node("devOps") {
+node{
 
         stage('Checkout') {
             checkout scm

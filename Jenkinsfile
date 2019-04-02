@@ -7,7 +7,7 @@ node{
 
         stage('Setup') {
 
-            gradlew 'clean'
+            gradle 'clean'
         }
 
         stage('Build') {

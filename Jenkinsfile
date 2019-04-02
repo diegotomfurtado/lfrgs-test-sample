@@ -12,4 +12,9 @@ node{
             gradle 'clean'
         }
 
+        stage('Build') {
+
+                gradle 'build unitTest'
+
+        }
 }

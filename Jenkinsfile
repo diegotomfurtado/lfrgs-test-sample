@@ -7,15 +7,22 @@ node{
             gradle 'functionalTest'
         }
 
-        stage('Tests') {
+        stage('Unit Testing') {
 
-            echo 'Testing...'
+            echo 'Unit Testing...'
+
+            gradle 'unitTest'
+        }
+
+        stage('Functional Testing') {
+
+            echo 'Functional Testing...'
+
+            gradle 'functionalTest'
 
             checkout scm
 
-           sh "./gradlew clean sonarqube"
-
-
+            sh "./gradlew clean sonarqube"
         }
 
         stage('Deploy') {

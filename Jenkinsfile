@@ -1,22 +1,5 @@
-#!groovy
-import groovy.transform.Field
 
-@Library("liferay-sdlc-jenkins-lib")
-import static org.liferay.sdlc.SDLCPrUtilities.*
-@Library("liferay-sdlc-jenkins-lib")
-import static org.liferay.sdlc.SDLCPrUtilities.*
-
-@Field final gitRepository = 'liferay/lfrgs-my-project'
-@Field final projectName = "My Project"
-@Field final projectKey = "lfrgs-my-project"
-
-properties([disableConcurrentBuilds()])
-
-def onError() {
-    handleError(gitRepository, "<GitHub User Email>", "<GitHub Authentication>")
-}
-
-node("lfrgs-my-project-pr-builder") {
+node("devOps") {
     try {
         stage('Checkout') {
             checkout scm
@@ -33,20 +16,13 @@ node("lfrgs-my-project-pr-builder") {
             if (bundlesDir.exists())
                 bundlesDir.deleteDir();
 
-            prInit(projectKey, projectName);
-
             gradlew 'clean'
-        }
-
-        stage('Init Bundle') {
-            gradlew 'initBundle -Pliferay.workspace.environment=ci'
         }
 
         stage('Build') {
             try {
                 gradlew 'build -x test -x integrationTest -x unitTest'
             } catch (exc) {
-                onError()
                 throw exc
             }
         }
@@ -57,7 +33,6 @@ node("lfrgs-my-project-pr-builder") {
                     gradlew 'test unitTest integrationTest functionalTest'
                 }
             } catch (exc) {
-                onError()
                 throw exc
             } finally {
                 junit testResults: '**/build/test-results/test/*.xml', allowEmptyResults: true
@@ -68,9 +43,6 @@ node("lfrgs-my-project-pr-builder") {
             }
         }
 
-        stage('Sonar') {
-            sonarqube gitRepository
-        }
     } finally {
         stage('Cleanup') {
             dir(workspace) {

@@ -23,19 +23,19 @@ node{
             checkout scm
 
             echo 'Testing 001'
-            sh 'make check || true'
+            
             junit '**/target/*.xml'
-
-            if (currentBuild.currentResult == 'SUCCESS') {
-                stage('Deploy') {
-                    sh 'make publish'
-                }
-            }
 
         }
 
         stage('Deploy') {
 
             echo 'Deploying...'
+
+            if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                stage('Deploy') {
+                    sh 'make publish'
+                }
+            }
         }
 }

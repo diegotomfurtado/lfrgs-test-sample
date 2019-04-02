@@ -14,7 +14,7 @@ node{
 
         stage('Build') {
 
-                gradle 'testFunctional -DtestFunctional.single'
+                gradle 'unitTest'
 
         }
 }

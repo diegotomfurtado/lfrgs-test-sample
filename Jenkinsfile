@@ -1,5 +1,3 @@
-#!groovy
-import groovy.transform.Field
 
 node{
 
@@ -19,7 +17,7 @@ node{
 
         stage('Test'){
             wrap([$class: 'Xvnc']) {
-               gradlew 'test functionalTest --continue'
+               gradle 'test functionalTest --continue'
             }
         }
 }

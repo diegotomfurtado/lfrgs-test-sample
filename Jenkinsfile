@@ -14,7 +14,7 @@ node{
 
         stage('Build') {
 
-                gradle 'build unitTest'
+                gradle 'unitTest'
 
         }
 }
